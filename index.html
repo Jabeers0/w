@@ -3,14 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Premium Dashboard</title>
+    <title>Premium Dashboard (Final Update)</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
     <style>
         :root {
-            --bg-dark: #100a1a;
-            --text-light: #f0e6ff;
-            --accent-gold: #ffc700;
+            --bg-dark: #100a1a; /* Deep midnight blue/purple */
+            --text-light: #f0e6ff; /* Soft glow white/purple */
+            --accent-gold: #ffc700; /* Gold accent color */
+            --border-color: rgba(255, 255, 255, 0.4);
+            --hover-border-color: var(--accent-gold);
         }
 
+        /* --- Global Body & Layout --- */
         body {
             background: var(--bg-dark);
             color: var(--text-light);
@@ -24,18 +30,17 @@
             overflow-x: hidden;
         }
 
-        /* --- Premium Layout --- */
         .premium-dashboard {
             display: flex;
             flex-direction: column;
             width: 100%;
             max-width: 450px;
             padding: 20px;
-            border-radius: 20px;
             text-align: center;
             position: relative;
         }
 
+        /* --- Header & Clock --- */
         .header {
             display: flex;
             justify-content: space-between;
@@ -43,23 +48,10 @@
             width: 100%;
             padding: 10px 0;
         }
-        .header h1 { 
-            font-size: 1.8em; 
-            margin: 0; 
-            font-weight: 600;
-        }
-        .clock-time { 
-            font-size: 1.2em; 
-            color: var(--accent-gold); 
-            font-weight: 300;
-        }
-        .header p {
-            font-style: italic;
-            font-size: 0.9em;
-            opacity: 0.8;
-            margin-top: 5px;
-        }
-
+        .header h1 { font-size: 1.8em; margin: 0; font-weight: 600; }
+        .clock-time { font-size: 1.2em; color: var(--accent-gold); font-weight: 300; }
+        .header p { font-style: italic; font-size: 0.9em; opacity: 0.8; margin-top: 5px; }
+        
         /* --- Love Time Counter --- */
         .love-time-section {
             flex-grow: 1;
@@ -87,7 +79,7 @@
             color: var(--accent-gold);
         }
 
-        /* --- Surprise Buttons --- */
+        /* --- Surprise Buttons (Updated Premium Style) --- */
         .surprise-buttons {
             display: flex;
             justify-content: space-around;
@@ -95,32 +87,37 @@
             padding: 0 10px;
         }
         .surprise-btn {
-            background: rgba(255, 255, 255, 0.1);
-            border: none;
+            background: transparent;
+            /* প্রিমিয়াম বর্ডার স্টাইল */
+            border: 2px solid var(--border-color); 
             color: var(--text-light);
-            padding: 12px 15px;
-            border-radius: 10px;
+            padding: 15px 15px;
+            border-radius: 15px; /* সফট কর্নার */
             cursor: pointer;
-            transition: all 0.3s ease;
-            font-size: 0.85em;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            font-size: 0.9em;
             display: flex;
             flex-direction: column;
             align-items: center;
+            flex-basis: 30%; /* সমান প্রস্থের বাটন */
         }
         .surprise-btn .icon {
-            font-size: 1.5em;
-            margin-bottom: 5px;
+            font-size: 1.8em; 
+            margin-bottom: 8px;
+            color: var(--accent-gold); 
         }
         .surprise-btn:hover {
-            background: rgba(255, 255, 255, 0.2);
-            box-shadow: 0 0 10px var(--text-light);
-            transform: translateY(-2px);
+            /* হোভারে গোল্ডেন গ্লো ইফেক্ট */
+            background: rgba(255, 199, 0, 0.1); 
+            border-color: var(--hover-border-color);
+            box-shadow: 0 5px 20px rgba(255, 199, 0, 0.4);
+            transform: scale(1.05); /* হালকা বড় হওয়া */
         }
-
-        /* --- Developer Mark --- */
+        
+        /* --- Developer Mark (Updated - Link only) --- */
         .developer-mark {
             font-size: 0.8em;
-            opacity: 0.6;
+            opacity: 0.8;
             padding-bottom: 10px;
             position: absolute;
             bottom: 0;
@@ -128,12 +125,18 @@
             transform: translateX(-50%);
             width: 100%;
         }
-        .developer-name-btn {
+        .developer-name-link {
             color: var(--text-light);
             text-decoration: none;
-            border-bottom: 1px dashed var(--text-light);
+            /* প্রিমিয়াম ড্যাশড আন্ডারলাইন */
+            border-bottom: 1px dashed var(--text-light); 
             padding: 2px 0;
             cursor: pointer;
+            transition: color 0.3s;
+        }
+        .developer-name-link:hover {
+            color: var(--accent-gold);
+            border-bottom-color: var(--accent-gold);
         }
 
         /* --- Premium Pop-up System --- */
@@ -143,7 +146,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.9);
+            background: rgba(0, 0, 0, 0.95); /* আরো ডার্ক ওভারলে */
             display: none;
             justify-content: center;
             align-items: center;
@@ -154,38 +157,31 @@
 
         .popup-content {
             background: var(--bg-dark);
-            border: 2px solid var(--accent-gold);
-            padding: 30px;
+            border: 3px double var(--accent-gold); /* ডাবল বর্ডার */
+            padding: 35px;
             border-radius: 20px;
             width: 85%;
             max-width: 450px;
-            transform: translateY(50px);
-            transition: transform 0.5s ease;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            transform: translateY(70px);
+            transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* বাউন্সি স্লাইড আপ */
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.7);
         }
-
-        .popup-content h3 {
-            color: var(--accent-gold);
-            margin-top: 0;
-        }
-
-        /* Pop-up Active State */
-        .premium-popup-overlay.is-visible {
-            display: flex;
-            opacity: 1;
-        }
-        .premium-popup-overlay.is-visible .popup-content {
-            transform: translateY(0);
-        }
+        .popup-content h3 { color: var(--accent-gold); margin-top: 0; }
+        .premium-popup-overlay.is-visible { display: flex; opacity: 1; }
+        .premium-popup-overlay.is-visible .popup-content { transform: translateY(0); }
         .close-btn {
-            margin-top: 20px;
+            margin-top: 25px;
             background: var(--accent-gold);
             color: var(--bg-dark);
             border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
+            padding: 10px 25px;
+            border-radius: 50px; /* পিল শেপ */
             cursor: pointer;
             font-weight: bold;
+            transition: background 0.3s;
+        }
+        .close-btn:hover {
+            background: #ffe38a;
         }
     </style>
 </head>
@@ -201,29 +197,31 @@
         <section class="love-time-section">
             <h2 id="love-time-display">Calculating...</h2>
             <p class="love-time-detail" id="love-time-detail">00:00:00</p>
-            <p class="status">☀️ Status: Feeling Happy Today!</p>
+            <p class="status">
+                
+            </p>
         </section>
 
         <section class="surprise-buttons">
             <button class="surprise-btn" data-popup="popup-photo">
-                <span class="icon">💌</span> Surprise 1
+                <span class="icon"><i class="fas fa-heart-circle-plus"></i></span> Surprise 1
             </button>
             <button class="surprise-btn" data-popup="popup-memory">
-                <span class="icon">🖼️</span> Surprise 2
+                <span class="icon"><i class="fas fa-calendar-star"></i></span> Surprise 2
             </button>
             <button class="surprise-btn" data-popup="popup-song">
-                <span class="icon">🎵</span> Surprise 3
+                <span class="icon"><i class="fas fa-music"></i></span> Surprise 3
             </button>
         </section>
 
         <footer class="developer-mark">
-            <span class="dev-icon">&lt; / &gt;</span> Marked by 
-            <span class="developer-name-btn" data-popup="popup-developer">Awesome Dev</span>
+            <i class="fas fa-code-branch" style="color: var(--accent-gold); margin-right: 5px;"></i> Coded by 
+            <a href="https://yourlink.com" target="_blank" class="developer-name-link">HRIDOY HASAN</a>
         </footer>
 
         <div id="popup-photo" class="premium-popup-overlay">
             <div class="popup-content">
-                <h3>💖 Secret Photo Gallery</h3>
+                <h3>Secret Photo Gallery</h3>
                 <p>আমাদের পছন্দের মুহূর্তগুলোর একটি গোপন সংগ্রহ। দেখে নাও!</p>
                 <button class="close-btn">Close</button>
             </div>
@@ -231,8 +229,8 @@
 
         <div id="popup-memory" class="premium-popup-overlay">
             <div class="popup-content">
-                <h3>🗓️ আমাদের বিশেষ দিন</h3>
-                <p>২০২৩ সালের নভেম্বর মাসের ৫ তারিখ। এই দিনে আমাদের প্রথম দেখা হয়েছিল!</p>
+                <h3>আমাদের বিশেষ দিন</h3>
+                <p>২০২৬ সালের ফেব্রুয়ারি মাসের যেকোনো তারিখ!তোমার সাথে দেখা হবে ইনশাআল্লাহ</p>
                 <button class="close-btn">Close</button>
             </div>
         </div>
@@ -245,35 +243,25 @@
             </div>
         </div>
 
-        <div id="popup-developer" class="premium-popup-overlay">
-            <div class="popup-content">
-                <h3>👨‍💻 Developer Information</h3>
-                <p>Devloper: HRIDOY HASAN</p>
-                <p>Contact: <a href="https://yourlink.com" target="_blank" style="color: var(--accent-gold);">Click Here</a></p>
-                <button class="close-btn">Close</button>
-            </div>
-        </div>
-
     </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // ১. লাভ টাইম কাউন্টার লজিক
             // আপনার সম্পর্কের শুরুর তারিখ এখানে সেট করুন
-            const START_DATE = new Date('2024-03-11T18:00:00'); 
+            const START_DATE = new Date('2025-11-25T03:00:00'); 
             const loveTimeDisplay = document.getElementById('love-time-display');
             const loveTimeDetail = document.getElementById('love-time-detail');
             const realTimeClock = document.getElementById('real-time-clock');
 
             function updateLoveTime() {
                 const now = new Date();
-                const diff = now - START_DATE;
                 
                 // রিয়েল-টাইম ক্লক আপডেট
                 const clockOptions = { hour: '2-digit', minute: '2-digit', hour12: true };
                 realTimeClock.textContent = now.toLocaleTimeString('en-US', clockOptions);
 
-                // বছর, মাস, দিন গণনা
+                // লাভ টাইম গণনা
+                const diff = now - START_DATE;
                 const totalSeconds = Math.floor(diff / 1000);
                 const totalMinutes = Math.floor(totalSeconds / 60);
                 const totalHours = Math.floor(totalMinutes / 60);
@@ -284,34 +272,32 @@
                 const months = Math.floor(remainingDaysAfterYears / 30.44);
                 const remainingDays = Math.floor(remainingDaysAfterYears % 30.44);
                 
-                // ঘন্টা, মিনিট, সেকেন্ড
                 const hours = totalHours % 24;
                 const minutes = totalMinutes % 60;
                 const seconds = totalSeconds % 60;
 
-                // Main Display: Years, Months, Days
+                // Main Display
                 loveTimeDisplay.textContent = `${years} Year, ${months} Months, ${remainingDays} Days`;
                 
-                // Detail Display: Hours, Minutes, Seconds
+                // Detail Display
                 loveTimeDetail.textContent = 
                     `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
             }
 
             // প্রতি সেকেন্ডে আপডেট করুন
             setInterval(updateLoveTime, 1000);
-            updateLoveTime(); // প্রথম কল
+            updateLoveTime();
 
-            // ২. প্রিমিয়াম পপ-আপ লজিক
-            const interactiveElements = document.querySelectorAll('.surprise-btn, .developer-name-btn');
+            // প্রিমিয়াম পপ-আপ লজিক
+            const surpriseButtons = document.querySelectorAll('.surprise-btn');
             const closeButtons = document.querySelectorAll('.close-btn');
 
-            interactiveElements.forEach(button => {
+            surpriseButtons.forEach(button => {
                 button.addEventListener('click', () => {
                     const popupId = button.getAttribute('data-popup');
                     const popup = document.getElementById(popupId);
                     if (popup) {
-                        popup.style.display = 'flex'; // প্রথমে ডিসপ্লে দেখান
-                        // ট্রানজিশনের জন্য একটু অপেক্ষা করুন
+                        popup.style.display = 'flex';
                         requestAnimationFrame(() => {
                             popup.classList.add('is-visible');
                         });
@@ -323,16 +309,14 @@
                 button.addEventListener('click', (e) => {
                     const popup = e.target.closest('.premium-popup-overlay');
                     if (popup) {
-                        // Fade out শুরু করুন
                         popup.classList.remove('is-visible');
-                        // ট্রানজিশন শেষ হওয়ার জন্য অপেক্ষা করুন (0.5 সেকেন্ড)
                         setTimeout(() => {
                             popup.style.display = 'none';
-                        }, 500); 
+                        }, 600); // ট্রানজিশন টাইমের চেয়ে একটু বেশি
                     }
                 });
             });
         });
     </script>
 </body>
-  </html>
+                </html>
